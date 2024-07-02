@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:21:41 by ilazar            #+#    #+#             */
-/*   Updated: 2024/06/28 14:16:05 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/02 17:34:31 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FRACTOL_H
 
 #include <stdio.h>
-#include <mlx.h>
 #include <stdlib.h>
+#include <math.h>
+#include <mlx.h>
 #include <X11/keysym.h>
+#include <X11/X.h>
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
@@ -33,5 +35,9 @@ typedef struct  s_complex
     double  real;
     double  i;
 }               t_complex;
+
+
+//close
+static int on_xclose(t_vars *vars);
 
 # endif

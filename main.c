@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:20:37 by ilazar            #+#    #+#             */
-/*   Updated: 2024/06/28 15:50:06 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/02 17:57:02 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,36 @@ void    fractol()
     }
 }
 
-int handle_input(int keysym, t_vars *vars)
+static int handle_no_event(void)
 {
-    printf("keypressed: %d\n", keysym);
-    if (keysym == XK_Escape)
-        mlx_destroy_window(vars->mlx, vars->win);
     return (0);
 }
 
-int handle_no_event(void)
+static int on_keyRelease(int keysym, t_vars *vars)
 {
+    printf("keyrealesed: %d\n", keysym);
+    if (keysym == XK_Escape)
+        on_xclose(vars);
     return (0);
 }
+
+static int on_mouseRelease(int button, int x, int y, t_vars vars)
+{
+    printf("mouse button: %d\n", button);
+    printf("x: %d\n", x);
+    printf("y: %d\n", y);
+    return (0);
+}
+
+static int on_xclose(t_vars *vars)
+{
+    mlx_destroy_window(vars->mlx, vars->win);
+    mlx_destroy_display(vars->mlx);
+    free(vars->mlx);
+    exit(1); //what is this?
+    return (0);
+}
+
 
 int main(void)
 {
@@ -61,17 +79,17 @@ int main(void)
         return (MLX_ERROR);
     vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "window1");
     if (vars.win == NULL)
-    {
-        free(vars.mlx);
-        return (MLX_ERROR);
-    }
+        return (free(vars.mlx), MLX_ERROR);
 
     mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
-    mlx_key_hook(vars.win, &handle_input, &vars);
+    mlx_hook(vars.win, KeyRelease, KeyReleaseMask, &on_keyRelease, &vars);
+    mlx_hook(vars.win, ButtonPress, ButtonPressMask, &on_mouseRelease, &vars);
+    mlx_hook(vars.win, DestroyNotify, StructureNotifyMask, &on_xclose, &vars);
+
 
     mlx_loop(vars.mlx);
 
-    mlx_destroy_display(vars.mlx);
-    free(vars.mlx);
+//    mlx_destroy_display(vars.mlx);
+  //  free(vars.mlx);
     return (0);
 }

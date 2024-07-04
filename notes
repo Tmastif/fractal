@@ -25,6 +25,17 @@ compile with minilibx
 cc main.c -lX11 -lXext -lmlx
 
 
+
+
+static void events_init(t_fractal *fractal)
+{
+	//key press
+	//mouse press
+	//close    
+
+}
+*/
+
  
 
 

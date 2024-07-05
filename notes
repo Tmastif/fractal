@@ -26,15 +26,11 @@ cc main.c -lX11 -lXext -lmlx
 
 
 
+//change one range to another: rescale value
 
-static void events_init(t_fractal *fractal)
-{
-	//key press
-	//mouse press
-	//close    
+((new_max - new_min) * (unscaled_num - old_min)) / (old_max - old_min) + new_min
 
-}
-*/
+
 
  
 

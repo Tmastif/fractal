@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:21:41 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/04 18:27:05 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/05 18:01:48 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,29 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
-# define MLX_ERROR -1
-
-typedef struct s_rect
-{
-    int x;
-    int y;
-    int width;
-    int height;
-    int color;
-}   t_rect;
+# define WIDTH 600
+# define HEIGHT 600
+# define MALLOC_ERROR -1
 
 typedef struct s_img
 {
     void    *img_ptr;
-    char    *img_pixel_ptr;
+    char    *pixel_ptr; //points to the 1st pixel of the img
     int bits_per_pixel;
     int line_len; //the amount of bytes taken by one row of our image
                   // == image_width * (bpp / 8).
     int endian;
 }               t_img;
 
-typedef struct s_vars
+typedef struct s_fractal
 {
     void    *mlx;
     void    *win;
     t_img   img;
-}   t_vars;
+    char    *name;
+    double  escape;
+    int max_iterations;
+}   t_fractal;
 
 typedef struct  s_complex
 {
@@ -56,17 +50,25 @@ typedef struct  s_complex
     double  i;
 }               t_complex;
 
-//img
+//events
+void    events_init(t_fractal *fractal);
+
+
+//fractal render
+void    fractal_render(t_fractal *fractal);
+
+
+//renderin
+int render(t_fractal *fractal);
 int encode_rgb (unsigned char red ,unsigned char green ,unsigned char blue);
 void   img_pixel_put(t_img *img, int x, int y, int color);
+double  scale(double unscaled, double new_min, double new_max, double old_max);
 
-//close
-static int on_xclose(t_vars *vars);
-static int close(t_vars *vars);
+//error
+void malloc_error();
 
-
-//delete me
-int  render_rect(t_vars *vars, t_rect rect);
-void    color_screen(t_vars *vars);
+//delete
+void    color_screen(t_fractal *fractal);
+void    background(t_fractal *fractal);
 
 # endif

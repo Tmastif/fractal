@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colorgame.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/05 15:21:43 by ilazar            #+#    #+#             */
+/*   Updated: 2024/07/05 15:25:17 by ilazar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "includes/fractol.h"
 
-// int encode_rgb (unsigned char red ,unsigned char green ,unsigned char blue)
-// {
-//     return (red << 16 | green << 8 | blue);
-// }
 
-void    color_screen(t_vars *vars)
+
+void    color_screen(t_fractal *fractal)
 {
     int y;
     int x;
@@ -17,17 +25,17 @@ void    color_screen(t_vars *vars)
     int b = 0;
     
     y = 0;
-    while (y < WINDOW_HEIGHT)
+    while (y < HEIGHT)
     {
         x = 0;
-        while (x < WINDOW_WIDTH)
+        while (x < WIDTH)
         {
             color = encode_rgb(r, g, b);
-            //mlx_pixel_put(vars->mlx, vars->win, x, y, color);
-            img_pixel_put(vars->mlx, x, y, color);
-            //mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img_ptr, 0, 0);
+            //mlx_pixel_put(fractal->mlx, fractal->win, x, y, color);
+            img_pixel_put(&fractal->img, x, y, color);
+            //mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
             r += 20;
-            g += 30;
+            g += 10;
             b += 50;
             if (r > 235)
                 r = 0;
@@ -40,18 +48,18 @@ void    color_screen(t_vars *vars)
         y++;
     }
 }
-void    background(t_vars *vars)
+void    background(t_fractal *fractal)
 {
     int y;
     int x;
     y = 0;
-    while (y < WINDOW_HEIGHT)
+    while (y < HEIGHT)
     {
         x = 0;
-        while (x < WINDOW_WIDTH)
+        while (x < WIDTH)
         {
             int color = encode_rgb(225,50,50);
-            img_pixel_put(vars->mlx, x, y, color);
+            img_pixel_put(&fractal->img, x, y, color);
             x++;
         }
         y++;

@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:09:24 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/05 18:08:43 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:56:03 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ static int clean_close(t_fractal *fractal);
 
 void    events_init(t_fractal *fractal)
 {
-    mlx_loop_hook(fractal->mlx, &render, fractal);
+    // mlx_loop_hook(fractal->mlx, &render, fractal);
+    //mlx_loop_hook(fractal->mlx, &fractal_render, fractal);
+    
     mlx_hook(fractal->win, KeyRelease, KeyReleaseMask, &on_keyRelease, fractal);
     mlx_hook(fractal->win, ButtonPress, ButtonPressMask, &on_mouseRelease, fractal);
     mlx_hook(fractal->win, DestroyNotify, StructureNotifyMask, &on_xclose, fractal);
-    mlx_loop(fractal->mlx);
 }
 static int on_keyRelease(int keysym, t_fractal *fractal)
 {

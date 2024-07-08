@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:21:43 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/05 15:25:17 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:40:31 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void    color_screen(t_fractal *fractal)
             color = encode_rgb(r, g, b);
             //mlx_pixel_put(fractal->mlx, fractal->win, x, y, color);
             img_pixel_put(&fractal->img, x, y, color);
-            //mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
             r += 20;
             g += 10;
             b += 50;

@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:20:37 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/05 18:13:18 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/08 22:02:35 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void malloc_error()
     exit(1);
 }
 
-void    screen_init(t_fractal *fractal)
+void    picture_init(t_fractal *fractal)
 {
     fractal->mlx = mlx_init();
     if (fractal->mlx == NULL)
@@ -51,17 +51,18 @@ int main(void)
 
     fractal.name = "Mandelbrot"; //av[1];
 
-    screen_init(&fractal);
+    picture_init(&fractal);
 
-    fractal.escape = 4;
-    fractal.max_iterations = 42;
-    
     events_init(&fractal);
     
+    fractal.escape = 4;
+    fractal.max_iterations = 256;
+    
+    fractal_render(&fractal);
+    
+    mlx_loop(fractal.mlx);
 
-    //fractal_render(&fractal);
-
-    // mlx_loop(fractal.mlx);
+    
 
     return (0);
 }

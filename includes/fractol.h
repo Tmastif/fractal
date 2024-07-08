@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:21:41 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/05 18:01:48 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/08 20:42:21 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void    fractal_render(t_fractal *fractal);
 int render(t_fractal *fractal);
 int encode_rgb (unsigned char red ,unsigned char green ,unsigned char blue);
 void   img_pixel_put(t_img *img, int x, int y, int color);
-double  scale(double unscaled, double new_min, double new_max, double old_max);
 
 //error
 void malloc_error();

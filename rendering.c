@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:37 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/05 18:10:29 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:45:40 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int render(t_fractal *fractal)
 {
     if (fractal->win != NULL)
     {
-        fractal_render(fractal);
-        //color_screen(fractal);
+        //fractal_render(fractal);
         // background(fractal);
-        //mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
+        color_screen(fractal);
+        mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
     }
     return (0);
 }

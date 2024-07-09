@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:37 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/08 19:45:40 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/09 20:25:33 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,15 @@ void   img_pixel_put(t_img *img, int x, int y, int color)
 
 
 
-int render(t_fractal *fractal)
-{
-    if (fractal->win != NULL)
-    {
-        //fractal_render(fractal);
-        // background(fractal);
-        color_screen(fractal);
-        mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
-    }
-    return (0);
-}
-double  scale(double unscaled, double new_min, double new_max, double old_max)
-{
-    double res;
+// int render(t_fractal *fractal)
+// {
+//     if (fractal->win != NULL)
+//     {
+//         //fractal_render(fractal);
+//         // background(fractal);
+//         //color_screen(fractal);
+//         //mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->img.img_ptr, 0, 0);
+//     }
+//     return (0);
+// }
 
-    res = (new_max - new_min) * (unscaled - 0);
-    return (res / (old_max - 0) + new_min);
-}
-    // int i;
-
-    // i = 0;
-    // while (i < 100)
-    // {
-    //         printf("%d -> %f\n", i, scale(i, 0, 5, 0, 99));
-    //         i++;
-    // }

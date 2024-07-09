@@ -13,7 +13,9 @@ norminette
 
 
 general formula
-f(z) = z^2 + c
+f(z) = z^2 + c    -> z(1) = c + c //first iteration
+
+
 
 z^2 =
 (x + yi)^2 =

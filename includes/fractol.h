@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:21:41 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/08 20:42:21 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/09 21:54:01 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ typedef struct s_fractal
     char    *name;
     double  escape;
     int max_iterations;
+    double shift_x;
+    double shift_y;
+    double  zoom;
+    double julia_x;
+    double julia_y;
 }   t_fractal;
 
 typedef struct  s_complex
@@ -50,8 +55,11 @@ typedef struct  s_complex
     double  i;
 }               t_complex;
 
+void    instructions();
+
 //events
 void    events_init(t_fractal *fractal);
+void    fractal_init(t_fractal *fractal);
 
 
 //fractal render
@@ -66,8 +74,8 @@ void   img_pixel_put(t_img *img, int x, int y, int color);
 //error
 void malloc_error();
 
-//delete
-void    color_screen(t_fractal *fractal);
-void    background(t_fractal *fractal);
+//utils
+double ft_atodbl(char *str);
+int ft_strcmp(char *s1, char *s2);
 
 # endif

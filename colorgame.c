@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:21:43 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/08 19:40:31 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/09 20:51:08 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void    color_screen(t_fractal *fractal)
 {
     int y;
     int x;
-    int rgb;
     int color;
     int r = 0;
     int g = 230;

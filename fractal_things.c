@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:58:48 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/08 22:42:08 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/09 22:09:32 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,22 @@ static void apply_formula(t_complex *z, t_complex *c)
         tmp_real = (z->real * z->real) - (z->i * z->i);
         z->i = 2 * z->real * z->i;
         z->real = tmp_real;
-        // + c
         z->real = z->real + c->real;
         z->i = z->i + c->i;
+}
+
+static void which_fractal(t_complex *z, t_complex *c, t_fractal *fractal)
+{
+    if (ft_strcmp(fractal->name, "julia"))
+    {
+        c->real = fractal->julia_x;
+        c->i = fractal->julia_y;
+    }
+    else
+    {
+        c->real = z->real;
+        c->i = z->i;
+    }
 }
 
 static void    handle_pixel(int x, int y, t_fractal *fractal)
@@ -43,16 +56,9 @@ static void    handle_pixel(int x, int y, t_fractal *fractal)
     int color;
 
     iterations = 0;
-    z.real = 0.0;
-    z.i = 0.0;
-    // z.real = scale(x, -2, 2, WIDTH);
-    // z.i = scale(y, 2, -2, HEIGHT);
-    //if fractal name == julia
-    // c.real = z.real;
-    // c.i = z.i;
-
-    c.real = scale(x, -2, 2, WIDTH);
-    c.i = scale(y, 2, -2, HEIGHT);
+    z.real = (scale(x, -2 , 2, WIDTH) * fractal->zoom) + fractal->shift_x;
+    z.i = (scale(y, 2, -2, HEIGHT) * fractal->zoom) + fractal->shift_y;
+    which_fractal(&z, &c, fractal);
     while (iterations < fractal->max_iterations)
     {
         apply_formula(&z, &c);
@@ -68,6 +74,9 @@ static void    handle_pixel(int x, int y, t_fractal *fractal)
     }
     img_pixel_put(&fractal->img, x, y, encode_rgb(0, 0, 0));
 }
+
+
+
 void    fractal_render(t_fractal *fractal)
 {
     int x;

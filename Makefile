@@ -1,63 +1,59 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ilazar <ilazar@student.42berlin.de>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/25 14:08:08 by ilazar            #+#    #+#              #
-#    Updated: 2024/05/07 14:20:22 by ilazar           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	= fractol
+OS		= $(shell uname)
 
-NAME := fractol
+# directories
+SRCDIR	= ./srcs
+INCDIR	= ./includes
+OBJDIR	= ./obj
 
-# Sources
-SRC_PATH := src/
-SRC := main.c
+# src / obj files
+SRC		= main.c events.c render_utils.c string_utils.c fractal.c errors.c
 
-# Minilibx
-MLX_PATH := minilibx-Linux/
-MLX_NAME := libmlx.a
-MLX 	:= $(MLX_PATH)$(MLX_NAME)
+OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
-# Libft
-LIBFT_PATH := libft
-LIBFT_NAME := libft.a
-LIBFT := $(LIBFT_PATH)$(LIBFT_NAME)
+# compiler
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
 
 
-OBJS := $(SRCS:%.c=%.o)
+# mlx library
+	MLX		= ./libs/mlx_linux/
+	MLX_LNK	= -L $(MLX) -l mlx -lXext -lX11
 
-INC_DIR := includes/\
-		minilibx-linux/
+##MLX_INC	= -I $(MLX)
+MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
-HEADER := -I$(INC_DIR)
+# ft library
+FT		= ./libs
+FT_LIB	= $(addprefix $(FT),libftprintf.a)
+FT_INC	= -I ./libs/libftprintf/includes
+FT_LNK	= -L ./libs/libftprintf/includes
 
-CC := cc
+all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 
-FLAGS := -Wall -Werror -Wextra
+obj:
+	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/fractals
 
+$(OBJDIR)/%.o:$(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
-all: $(NAME)
+$(FT_LIB):
+	@make -C $(FT)
 
-$(NAME): $(OBJS)
-	make -C $(LIBFT_DIR)
-	cp $(LIBFT_DIR)/libft.a .
-	mv libft.a $(NAME)
-	ar -rcs $(NAME) $(OBJS)
+$(MLX_LIB):
+	@make -C $(MLX)
 
-%.o : %.c
-	$(CC) -c $(FLAGS) $(HEADER) $< -o $@
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
 
-clean: 
-	rm -f $(OBJS)
-	make -C $(LIBFT_DIR) clean
+clean:
+	rm -rf $(OBJDIR)
+	make -C $(FT) clean
+	make -C $(MLX) clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	rm -rf $(NAME)
+	make -C $(FT) fclean
 
 re: fclean all
-
-.PHONY: all bonus clean fclean re

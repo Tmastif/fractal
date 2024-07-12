@@ -1,5 +1,4 @@
 NAME	= fractol
-OS		= $(shell uname)
 
 # directories
 SRCDIR	= ./srcs
@@ -25,18 +24,18 @@ MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
 # ft library
 FT		= ./libs
-FT_LIB	= $(addprefix $(FT),libftprintf.a)
-FT_INC	= -I ./libs/libftprintf/includes
-FT_LNK	= -L ./libs/libftprintf/includes
+FT_LIB	= $(addprefix $(FT)/,libftprintf.a)
+FT_INC	= -I ./libs/includes
+FT_LNK	= -L ./libs/includes
 
 all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
-	mkdir -p $(OBJDIR)/fractals
 
 $(OBJDIR)/%.o:$(SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	#$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	@make -C $(FT)
@@ -45,7 +44,7 @@ $(MLX_LIB):
 	@make -C $(MLX)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
+	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) $(FT_LIB) -lm -o $(NAME)
 
 clean:
 	rm -rf $(OBJDIR)

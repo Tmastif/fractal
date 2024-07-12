@@ -1,3 +1,3 @@
-objs/libft/ft_itoa.o: libftprintf/libft/ft_itoa.c includes/libft.h
+objs/libft/ft_itoa.o: libft/ft_itoa.c includes/libft.h
 
 includes/libft.h:

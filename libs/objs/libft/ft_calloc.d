@@ -1,3 +1,3 @@
-objs/libft/ft_calloc.o: libftprintf/libft/ft_calloc.c includes/libft.h
+objs/libft/ft_calloc.o: libft/ft_calloc.c includes/libft.h
 
 includes/libft.h:

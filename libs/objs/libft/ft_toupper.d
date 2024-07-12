@@ -1,3 +1,3 @@
-objs/libft/ft_toupper.o: libftprintf/libft/ft_toupper.c includes/libft.h
+objs/libft/ft_toupper.o: libft/ft_toupper.c includes/libft.h
 
 includes/libft.h:

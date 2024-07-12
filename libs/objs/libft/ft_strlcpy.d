@@ -1,3 +1,3 @@
-objs/libft/ft_strlcpy.o: libftprintf/libft/ft_strlcpy.c includes/libft.h
+objs/libft/ft_strlcpy.o: libft/ft_strlcpy.c includes/libft.h
 
 includes/libft.h:

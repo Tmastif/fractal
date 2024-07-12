@@ -15,8 +15,7 @@
 NAME	=		libftprintf.a
 
 # ------------  DIRECTORIES  ------------------------------------------------- #
-SRC_DIR	=		libftprintf
-HDR_DIR	=		includes
+HDR_DIR	=		./includes
 OBJ_DIR	=		objs
 LIBFT_DIR =		libft
 FT_PRINTF_DIR =	ft_printf
@@ -43,8 +42,8 @@ FT_PRINTF_FLS = $(addprefix $(FT_PRINTF_DIR)/,ft_cntdigits.c ft_format_ptrhex.c 
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #
-SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
-OBJS	=		$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRCS))
+SRCS	=		$(SRC_FLS)
+OBJS	=		$(patsubst %.c,$(OBJ_DIR)/%.o, $(SRCS))
 DEPS	=		$(OBJS:.o=.d)
 
 # ------------  FLAGS  ------------------------------------------------------- #
@@ -58,8 +57,8 @@ DFLGS	=		-MMD -MP -O1
 all: $(NAME)
 
 -include $(DEPS)
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) -c -o $@ $< $(IFLGS)
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	$(CC) $(CFLGS) $(IFLGS) $(DFLGS) -c -o $@ $<
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

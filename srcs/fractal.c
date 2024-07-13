@@ -28,7 +28,7 @@ static void	apply_formula(t_complex *z, t_complex *c)
 
 static void	which_fractal(t_complex *z, t_complex *c, t_fractal *fractal)
 {
-	if (!ft_strncmp(fractal->name, "julia", 5))
+	if (fractal->mandelbrot == 0)
 	{
 		c->real = fractal->julia_x;
 		c->i = fractal->julia_y;

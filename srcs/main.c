@@ -19,17 +19,17 @@ int	main(int ac, char **av)
 	if (ac == 2 || ac == 4)
 	{
 		if (!ft_strncmp(av[1], "mandelbrot", 10))
-			fractal.name = av[1];
+			fractal.mandelbrot = 1;
 		else if (!ft_strncmp(av[1], "julia", 5) && ac == 4)
 		{
-			fractal.name = av[1];
+			fractal.mandelbrot = 0;
 			fractal.julia_x = ft_atodbl(av[2]);
 			fractal.julia_y = ft_atodbl(av[3]);
 		}
 		else
 			return (instructions(), 0);
-		picture_init(&fractal);
 		fractal_init(&fractal);
+		picture_init(&fractal);
 		events_init(&fractal);
 		fractal_render(&fractal);
 		mlx_loop(fractal.mlx);
@@ -72,4 +72,14 @@ void	fractal_init(t_fractal *fractal)
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
+	if (fractal->mandelbrot == 1)
+	{
+		fractal->name = "Mandelbrot";
+		fractal->julia_x = 0;
+		fractal->julia_y = 0;
+	}
+	else
+	{
+		fractal->name = "Julia";
+	}
 }

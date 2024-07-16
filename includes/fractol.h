@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:21:41 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/12 15:23:58 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/15 19:09:55 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <math.h>
+//# include <math.h>
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -81,6 +81,5 @@ void				instructions(void);
 
 // utils
 double				ft_atodbl(char *str);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

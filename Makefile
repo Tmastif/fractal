@@ -19,7 +19,7 @@ CFLAGS	= -Wall -Wextra -Werror
 	MLX		= ./libs/mlx_linux/
 	MLX_LNK	= -L $(MLX) -l mlx -lXext -lX11
 
-##MLX_INC	= -I $(MLX)
+MLX_INC	= -I $(MLX)
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
 # ft library
@@ -34,8 +34,8 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o:$(SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
-	#$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	#$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	@make -C $(FT)

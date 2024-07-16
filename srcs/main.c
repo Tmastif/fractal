@@ -6,7 +6,7 @@
 /*   By: ilazar <ilazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:20:37 by ilazar            #+#    #+#             */
-/*   Updated: 2024/07/12 15:25:40 by ilazar           ###   ########.fr       */
+/*   Updated: 2024/07/15 19:29:09 by ilazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	main(int ac, char **av)
 {
-	t_fractal	fractal;
-
 	if (ac == 2 || ac == 4)
 	{
 		if (!ft_strncmp(av[1], "mandelbrot", 10))
